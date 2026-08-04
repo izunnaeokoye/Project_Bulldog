@@ -1,0 +1,17 @@
+[1.250s] Invoking command in '/home/izunna/robot_ws/build/robot_controller': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/izunna/robot_ws/build/robot_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/izunna/robot_ws/install/robot_controller/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/izunna/robot_ws/build/robot_controller/build --no-deps symlink_data
+[1.726s] running develop
+[2.001s] running egg_info
+[2.028s] writing robot_controller.egg-info/PKG-INFO
+[2.029s] writing dependency_links to robot_controller.egg-info/dependency_links.txt
+[2.029s] writing entry points to robot_controller.egg-info/entry_points.txt
+[2.029s] writing requirements to robot_controller.egg-info/requires.txt
+[2.029s] writing top-level names to robot_controller.egg-info/top_level.txt
+[2.082s] reading manifest file 'robot_controller.egg-info/SOURCES.txt'
+[2.082s] writing manifest file 'robot_controller.egg-info/SOURCES.txt'
+[2.113s] running build_ext
+[2.113s] Creating /home/izunna/robot_ws/install/robot_controller/lib/python3.12/site-packages/robot-controller.egg-link (link to .)
+[2.115s] Installing motor_node script to /home/izunna/robot_ws/install/robot_controller/lib/robot_controller
+[2.115s] 
+[2.115s] Installed /home/izunna/robot_ws/build/robot_controller
+[2.115s] running symlink_data
+[2.203s] Invoked command in '/home/izunna/robot_ws/build/robot_controller' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/izunna/robot_ws/build/robot_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/izunna/robot_ws/install/robot_controller/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/izunna/robot_ws/build/robot_controller/build --no-deps symlink_data
