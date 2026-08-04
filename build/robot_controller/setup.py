@@ -1,1 +1,0 @@
-/home/izunna/robot_ws/src/robot_controller/setup.py
