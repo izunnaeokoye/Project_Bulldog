@@ -26,7 +26,7 @@ class MotorNode(Node):
 
         if linear > 0.05:
             drive_forward(speed)
-k
+
         elif linear < -0.05:
             drive_backward(speed)
 
