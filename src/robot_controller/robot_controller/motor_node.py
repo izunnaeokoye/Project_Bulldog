@@ -1,13 +1,15 @@
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
-from robot_controller.yahboom_motor import drive_forward, drive_backward, stop_robot
+
+from robot_controller.yahboom_motor import send_wheel_speeds, stop_robot
 
 
 class MotorNode(Node):
 
     def __init__(self):
         super().__init__('motor_node')
+
         self.subscription = self.create_subscription(
             Twist,
             '/cmd_vel',
@@ -15,24 +17,36 @@ class MotorNode(Node):
             10
         )
 
+        self.get_logger().info('Motor node started')
+
     def cmd_callback(self, msg):
+
         linear = msg.linear.x
         angular = msg.angular.z
 
-        MAX_SPEED = 600
-        speed = int(abs(linear) * MAX_SPEED)
+        MAX_SPEED = 400
 
-        print(f"Linear: {linear:.2f}, Angular: {angular:.2f}")
+        # Differential-drive mixing
+        left = (linear - angular) * MAX_SPEED
+        right = (linear + angular) * MAX_SPEED
 
-        if linear > 0.05:
-            drive_forward(speed)
+        # Limit speeds
+        left = max(min(left, MAX_SPEED), -MAX_SPEED)
+        right = max(min(right, MAX_SPEED), -MAX_SPEED)
 
-        elif linear < -0.05:
-            drive_backward(speed)
+        # Convert logical wheel directions into
+        # the physical motor directions used by the Yahboom board.
+        send_wheel_speeds({
+            "front_left": int(left),
+            "rear_left": int(-left),
+            "front_right": int(right),
+            "rear_right": int(-right),
+        })
 
-        else:
-            stop_robot()
-        
+    def destroy_node(self):
+        stop_robot()
+        super().destroy_node()
+
 
 def main(args=None):
 
@@ -40,10 +54,16 @@ def main(args=None):
 
     node = MotorNode()
 
-    rclpy.spin(node)
+    try:
+        rclpy.spin(node)
 
-    node.destroy_node()
-    rclpy.shutdown()
+    except KeyboardInterrupt:
+        pass
+
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+
 
 if __name__ == '__main__':
     main()
